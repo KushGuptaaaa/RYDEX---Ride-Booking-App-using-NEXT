@@ -78,7 +78,7 @@ Google({
    return token
    },
    async session ({token,session}){
-
+    // token se data session me dalna hoga taki frontend me use ho sake
     if(session.user){
         session.user.name=token.name,
         session.user.id=token.id as string,
