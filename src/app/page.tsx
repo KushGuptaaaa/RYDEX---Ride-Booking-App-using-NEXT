@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import Footer from "@/components/Footer";
 
 import Nav from "@/components/Nav";
 
@@ -15,6 +16,7 @@ const session=await auth()
    <div className="w-full min-h-screen bg-white">
       <Nav/>
       <PublicHome/>
+      <Footer/>
    </div>
   );
 }

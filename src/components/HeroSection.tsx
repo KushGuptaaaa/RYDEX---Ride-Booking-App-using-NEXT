@@ -2,11 +2,13 @@
 import React, { useEffect } from 'react'
 import { motion } from "motion/react"
 import { Bike, Bus, Car, Truck } from 'lucide-react'
-
+import { useSelector } from 'react-redux'
+import { RootState } from '@/redux/store'
 import { useRouter } from 'next/navigation'
 
 function HeroSection({onAuthRequired}:{onAuthRequired:()=>void}) {
-
+const {userData}=useSelector((state:RootState)=>state.user)
+const router=useRouter()
 
 
     return (
@@ -51,7 +53,7 @@ function HeroSection({onAuthRequired}:{onAuthRequired:()=>void}) {
             bg-white text-black
             rounded-full font-semibold
             shadow-xl'
-            
+            onClick={()=>{!userData?onAuthRequired():router.push("/user/book")}}
                 >
 
                     Book Now
