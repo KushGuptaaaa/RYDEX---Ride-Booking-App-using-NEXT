@@ -5,9 +5,10 @@ export interface IUser extends Document{
 name:string;
 email:string;
 password?:string; // ? for it can be there or not as loggin in with google or facebook will not have password
-
+mobileNumber?:string
 role:"user" | "partner" | "admin"
 
+partnerOnBoardingSteps:number
 isEmailVerified?:boolean
 otp?:string,
 otpExpiresAt?:Date
@@ -33,6 +34,15 @@ role:{
     type:String,
     default:"user",
     enum:["user","partner","admin"]
+},
+partnerOnBoardingSteps:{
+    type:Number,
+    min:0,
+    max:8,
+    default:0,
+},
+mobileNumber:{
+type:String
 },
 isEmailVerified:{
     type:Boolean,
