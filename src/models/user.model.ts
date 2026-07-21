@@ -6,6 +6,7 @@ name:string;
 email:string;
 password?:string; // ? for it can be there or not as loggin in with google or facebook will not have password
 mobileNumber?:string
+partnerStatus:"pending" | "approved" | "rejected"
 role:"user" | "partner" | "admin"
 
 partnerOnBoardingSteps:number
@@ -40,6 +41,11 @@ partnerOnBoardingSteps:{
     min:0,
     max:8,
     default:0,
+},
+partnerStatus:{
+    type:String,
+    emnum:["pending" , "approved" , "rejected"],
+    default: "pending"
 },
 mobileNumber:{
 type:String

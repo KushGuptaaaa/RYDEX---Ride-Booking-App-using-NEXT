@@ -36,7 +36,7 @@ export async function POST(req: Request) {
             )
         }
         const vehicleNumber = number.toUpperCase()
-       
+
 
 
 
@@ -47,19 +47,19 @@ export async function POST(req: Request) {
             vehicle.vehicleModel = vehicleModel
             vehicle.status = "pending"
             await vehicle.save()
-             if(user.partnerOnBoardingSteps<2){
-                user.partnerOnBoardingSteps=2
-                user.partnerStatus="pending"
+            if (user.partnerOnBoardingSteps < 2) {
+                user.partnerOnBoardingSteps = 2
+                user.partnerStatus = "pending"
                 await user.save()
-             }else{
-                user.partnerOnBoardingSteps=3
-                user.partnerStatus="pending"
+            } else {
+                user.partnerOnBoardingSteps = 3
+                user.partnerStatus = "pending"
                 await user.save()
-             }
+            }
             return Response.json(vehicle, { status: 200 })
         }
 
- const duplicate = await Vehicle.findOne({ number: vehicleNumber })
+        const duplicate = await Vehicle.findOne({ number: vehicleNumber })
         if (duplicate) {
             return Response.json(
                 { message: "Vehicle already registered" }
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
         }
 
         vehicle = await Vehicle.create({
-            owner:user._id,
+            owner: user._id,
             type,
             number: vehicleNumber,
             vehicleModel
@@ -79,7 +79,7 @@ export async function POST(req: Request) {
             user.partnerOnBoardingSteps = 1
         }
         user.role = "partner"
-        user.partnerStatus="pending"
+        user.partnerStatus = "pending"
         await user.save()
 
 
@@ -92,9 +92,9 @@ export async function POST(req: Request) {
     }
 }
 
-export async function GET(req:NextRequest){
+export async function GET(req: NextRequest) {
     try {
-         await connectDb()
+        await connectDb()
         const session = await auth()
         if (!session || !session.user?.email) {
             return Response.json({ message: "unauthorized" }
@@ -109,9 +109,9 @@ export async function GET(req:NextRequest){
             )
         }
         let vehicle = await Vehicle.findOne({ owner: user._id })
-        if(vehicle){
+        if (vehicle) {
             return Response.json(vehicle, { status: 200 })
-        }else{
+        } else {
             return Response.json({ message: "vehicle not found" }
                 , { status: 400 }
             )
